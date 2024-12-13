@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库管理系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-database-compat.min.js"></script>
+</head>
+
+<body>
+    <div class="基本块">
+        <div class="顶部块">
+            <h1>您好！管理员。</h1>
+            <!-- 在顶部块中的配置logo部分，需要修改svg的viewBox和path -->
+            <div class="配置logo" onclick="showConfigModal()">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+                    <path
+                        d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="内容块">
+            <table class="数据表" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>序号</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="底部块">
+            <div class="功能块" id="数据库块" onclick="showDatabaseModal()">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                    <path
+                        d="M12 3C16.95 3 21 4.34 21 6V18C21 19.66 16.95 21 12 21C7.05 21 3 19.66 3 18V6C3 4.34 7.05 3 12 3Z" />
+                    <path d="M21 14C21 15.66 16.95 17 12 17C7.05 17 3 15.66 3 14" />
+                    <path d="M21 10C21 11.66 16.95 13 12 13C7.05 13 3 11.66 3 10" />
+                </svg>
+                <span>数据库</span>
+            </div>
+            <div class="功能块" id="搜索块" onclick="toggleSearch()">
+                <svg id="searchIcon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                    fill="none">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span id="searchText">搜索</span>
+            </div>
+            <div class="功能块" id="操作项块" onclick="showOperationsModal()">
+                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+                    <path d="M3 21H21" />
+                    <path d="M5 21V7L13 3V21" />
+                    <path d="M19 21V11L13 7" />
+                    <path d="M9 9V9.01" />
+                    <path d="M9 13V13.01" />
+                    <path d="M9 17V17.01" />
+                </svg>
+                <span>操作项</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 配置弹窗 -->
+    <div id="configModal" class="modal config-modal">
+        <div class="modal-content">
+            <!-- 添加关闭按钮 -->
+            <button class="close-button" onclick="closeConfigModal()">×</button>
+
+            <h2 class="config-modal-title">您好！管理员。</h2>
+            <div class="form-group">
+                <label>1.数据库名称：</label>
+                <input type="text" id="dbName">
+            </div>
+            <div class="form-group">
+                <label>2.数据库配置：</label>
+                <textarea id="dbConfig" placeholder="请输入Firebase配置信息，标准格式：
+        const firebaseConfig = {
+          apiKey: 'xxxxxxxxxxxxxxxxxxxx',
+          authDomain: 'xxxxxxxxxxxxxxxxxxxx',
+          databaseURL: 'https://xxxxxxxxxxxxxxxxxxxx.firebasedatabase.app',
+          projectId: 'xxxxxxxxxxxxxxxxxxxx',
+          storageBucket: 'xxxxxxxxxxxxxxxxxxxx.app',
+          messagingSenderId: 'xxxxxxxxxxxxxxxxxxxx',
+          appId: 'xxxxxxxxxxxxxxxxxxxx',
+          measurementId: 'xxxxxxxxxxxxxxxxxxxx'
+        };"></textarea>
+            </div>
+            <div class="config-button-block">
+                <button class="config-button delete" onclick="deleteConfig()">删除</button>
+                <button class="config-button add" onclick="addConfig()">添加</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 数据库选择弹窗 -->
+    <div id="databaseModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title-centered">请选择数据(,,･∀･)ﾉ</h2>
+
+            <div class="form-group-styled">
+                <label>1.数据库选项：</label>
+                <select id="databaseSelect" onchange="loadTables()"></select>
+            </div>
+
+            <div class="form-group-styled">
+                <label>2.数据表选项：</label>
+                <select id="tableSelect" onchange="loadFields()"></select>
+            </div>
+
+            <div class="form-group-styled">
+                <label>3.字段选项：</label>
+                <div id="fieldOptions" class="字段选择组-styled"></div>
+            </div>
+
+            <div class="按钮块-centered">
+                <button class="按钮-styled 次要" onclick="closeDatabaseModal()">取消</button>
+                <button class="按钮-styled 主要" onclick="applySelection()">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 搜索弹窗 -->
+    <div id="searchModal" class="modal search-modal">
+        <div class="modal-content">
+            <h2 class="search-modal-title">您好！请搜索。</h2>
+            <div class="search-form-group">
+                <input type="text" id="searchInput" placeholder="请输入搜索关键字">
+            </div>
+            <div class="search-button-block">
+                <button class="search-button cancel" onclick="closeSearchModal()">取消</button>
+                <button class="search-button confirm" onclick="performSearch()">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除弹窗 -->
+    <div id="删除确认弹窗" class="删除确认弹窗">
+        <div class="删除确认内容">
+            <div class="删除确认标题">确认删除选中的记录吗？</div>
+            <div class="删除确认按钮组">
+                <button class="取消按钮" onclick="closeDeleteConfirm()">取消</button>
+                <button class="确认按钮" onclick="confirmDelete()">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示框容器 -->
+    <div id="toast-container" class="toast-container">
+        <div id="toast" class="toast">
+            <div class="toast-content"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

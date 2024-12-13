@@ -1,0 +1,784 @@
+/* ---------- 基础重置样式 ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 12.5px;
+}
+
+/* ---------- 布局基础样式 ---------- */
+.基本块 {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #f5f5f5;
+}
+
+/* ---------- 顶部块样式 ---------- */
+.顶部块 {
+    width: 100%;
+    padding: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.顶部块 h1 {
+    color: #333;
+    font-size: 18px;
+}
+
+.配置logo {
+    position: absolute;
+    right: 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.配置logo:hover {
+    color: #333;
+}
+
+/* ---------- 内容块样式 ---------- */
+.内容块 {
+    width: calc(100% - 20px);
+    margin: 10px auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    position: relative;
+    flex: 1;
+    min-height: 0;
+}
+
+/* ---------- 表格基础样式 ---------- */
+.数据表 {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #eee;
+    table-layout: fixed;
+    position: relative;
+    overflow: visible;
+}
+
+/* 表格单元格通用样式 */
+.数据表 th,
+.数据表 td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #eee;
+    white-space: nowrap;
+    background-color: #ffffff;
+}
+
+/* 表头样式 */
+.数据表 thead tr {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: #f8f9fa;
+}
+
+.数据表 th {
+    background-color: #f8f9fa !important;
+    font-weight: 600;
+    z-index: 5;
+    position: sticky;
+    top: 0;
+}
+
+/* 序号列样式 */
+.数据表 th:first-child,
+.数据表 td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+    border-right: 1px solid #eee;
+    background-color: #ffffff;
+}
+
+.数据表 th:first-child {
+    z-index: 6;
+    top: 0;
+}
+
+/* 数据列样式 */
+.数据表 th.数据列,
+.数据表 td.数据列 {
+    min-width: 150px;
+    max-width: 200px;
+    padding: 12px;
+    white-space: nowrap;
+    overflow-x: auto;
+    text-overflow: initial;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.数据表 th.数据列::-webkit-scrollbar,
+.数据表 td.数据列::-webkit-scrollbar {
+    display: none;
+}
+
+/* 操作列样式 */
+.数据表 th.操作列,
+.数据表 td.操作列 {
+    position: sticky;
+    right: 40px;
+    z-index: 3;
+    width: 45px;
+    min-width: 45px;
+    max-width: 45px;
+    border-left: 1px solid #eee;
+    text-align: center;
+    padding: 12px 4px;
+}
+
+.数据表 th.操作列 {
+    z-index: 6;
+    top: 0;
+    background-color: #f8f9fa !important;
+}
+
+/* 复选框列样式 */
+.数据表 th.复选框列,
+.数据表 td.复选框列 {
+    position: sticky;
+    right: 0;
+    z-index: 3;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+    border-left: 1px solid #eee;
+    background-color: #ffffff;
+}
+
+.数据表 th.复选框列 {
+    z-index: 6;
+    top: 0;
+    background-color: #f8f9fa !important;
+}
+
+/* ---------- 底部功能区样式 ---------- */
+.底部块 {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10;
+}
+
+.功能块,
+.保存块 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    color: #666;
+    position: relative;
+}
+
+.功能块:hover,
+.保存块:hover {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.功能块 svg,
+.保存块 svg {
+    margin-bottom: 4px;
+    display: block;
+}
+
+.功能块 span,
+.保存块 span {
+    font-size: 14px;
+    color: inherit;
+}
+
+/* ---------- 下拉菜单样式 ---------- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    z-index: 1001;
+    width: 20px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 120px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    z-index: 1003;
+    right: 35px;
+    top: 0;
+    padding: 4px 0;
+}
+
+.dropdown-content a,
+.batch-operations-menu a {
+    color: #333;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: background-color 0.3s;
+}
+
+.dropdown-content a:hover,
+.batch-operations-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+/* ---------- 按钮和操作样式 ---------- */
+.操作列 .按钮 {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #666;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.操作列 .按钮:hover {
+    background-color: #f5f5f5;
+}
+
+.操作列 .按钮 svg {
+    display: block;
+}
+
+.editing {
+    background-color: #fff3e0;
+}
+
+.save-icon {
+    color: #4CAF50;
+}
+
+.save-icon:hover {
+    opacity: 0.8;
+}
+
+/* ---------- 模态框基础样式 ---------- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: none;
+}
+
+.modal-content {
+    position: fixed;
+    background-color: #fff;
+    width: 90%;
+    max-width: 350px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* ---------- 表单样式 ---------- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+/* ---------- 按钮统一样式 ---------- */
+.按钮-base {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+.按钮-base:hover {
+    opacity: 0.9;
+}
+
+.按钮-base.主要 {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.按钮-base.次要 {
+    background-color: #f44336;
+    color: white;
+}
+
+/* ---------- 搜索模态框样式 ---------- */
+.search-modal .modal-content {
+    pointer-events: auto;
+}
+
+.search-modal-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.search-form-group {
+    margin-bottom: 20px;
+}
+
+.search-form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.search-button-block {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.search-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+.search-button.cancel {
+    background-color: #f44336;
+    color: white;
+}
+
+.search-button.confirm {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.search-button:hover {
+    opacity: 0.9;
+}
+
+/* ---------- 配置弹窗样式 ---------- */
+.config-modal {
+    pointer-events: none;
+}
+
+.config-modal .modal-content {
+    pointer-events: auto;
+    position: relative;
+}
+
+.config-modal-title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+.config-button-block {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.config-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+.config-button.delete {
+    background-color: #f44336;
+    color: white;
+}
+
+.config-button.add {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.config-button:hover {
+    opacity: 0.9;
+}
+
+/* ---------- 批量操作菜单样式 ---------- */
+.batch-operations-menu {
+    display: none;
+    position: fixed; /* 改为 fixed 定位 */
+    background-color: #ffffff;
+    min-width: 120px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    border-radius: 4px;
+    padding: 4px 0;
+}
+
+/* ---------- 新增记录样式 ---------- */
+.新增行 {
+    opacity: 0.7;
+    background-color: #f8f9fa;
+    transition: opacity 0.3s;
+}
+
+.新增行:hover {
+    opacity: 1;
+}
+
+.新增按钮 {
+    cursor: pointer;
+    color: #4CAF50;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* ---------- 删除确认弹窗样式 ---------- */
+.删除确认弹窗 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 3000;
+    display: none;
+}
+
+.删除确认内容 {
+    position: fixed;
+    background-color: #fff;
+    width: 90%;
+    max-width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.删除确认按钮组 {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.删除确认按钮组 button {
+    padding: 8px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+.删除确认按钮组 .取消按钮 {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.删除确认按钮组 .确认按钮 {
+    background-color: #f44336;
+    color: white;
+}
+
+.删除确认按钮组 button:hover {
+    opacity: 0.9;
+}
+
+/* ---------- 数据库选择弹窗样式 ---------- */
+.modal-title-centered {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.form-group-styled {
+    margin-bottom: 10px;
+    padding: 6px;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    font-size: 12.5px;
+}
+
+.form-group-styled label {
+    display: block;
+    margin-bottom: 5px;
+    color: #444;
+    font-size: 12.5px;
+    font-weight: bold;
+}
+
+.form-group-styled select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: #333;
+    background-color: white;
+    transition: border-color 0.3s;
+}
+
+.form-group-styled select:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* ---------- 字段选择组样式 ---------- */
+.字段选择组-styled {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.字段选项-styled {
+    padding: 4px 12px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s;
+    background-color: white;
+    font-size: 12.5px;
+    margin: 5px;
+}
+
+.字段选项-styled:hover {
+    background-color: #f0f0f0;
+}
+
+.字段选项-styled.selected {
+    background-color: #4CAF50;
+    color: white;
+    border-color: #4CAF50;
+}
+
+/* ---------- 数据库选择按钮组样式 ---------- */
+.按钮块-centered {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.按钮-styled {
+    padding: 6px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+.按钮-styled:hover {
+    opacity: 0.9;
+}
+
+.按钮-styled.主要 {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.按钮-styled.次要 {
+    background-color: #f44336;
+    color: white;
+}
+
+/* ---------- 搜索功能块样式 ---------- */
+.功能块#搜索块 svg {
+    transition: transform 0.3s ease;
+}
+
+.功能块#搜索块:hover svg {
+    transform: scale(1.1);
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* ---------- Toast 提示框样式 ---------- */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    display: none;
+    min-width: 280px;
+    margin-bottom: 10px;
+    background-color: #4CAF50;  /* 默认绿色 */
+    color: white;
+    text-align: left;
+    border-radius: 8px;
+    padding: 16px 20px;
+    position: relative;
+    animation: slideIn 0.5s, fadeOut 0.5s 2.5s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-left: 6px solid #388E3C;
+    font-weight: 500;
+}
+
+.toast.show {
+    display: flex;
+    align-items: center;
+}
+
+.toast::before {
+    content: "!";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+.toast-content {
+    font-size: 14px;
+    line-height: 1.4;
+    flex-grow: 1;
+}
+
+/* 动画效果 */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* 错误提示样式 */
+.toast.error {
+    background-color: #f44336;  /* 统一错误提示的红色 */
+    border-left-color: #d32f2f;
+}
+
+/* 警告提示样式 */
+.toast.warning {
+    background-color: #ff9800;  /* 统一警告提示的橙色 */
+    border-left-color: #f57c00;
+}
+
+/* 信息提示样式 */
+.toast.info {
+    background-color: #2196F3;  /* 统一信息提示的蓝色 */
+    border-left-color: #1976D2;
+}
